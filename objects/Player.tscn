@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://4q6nn6ab8mdu"]
+[gd_scene load_steps=5 format=3 uid="uid://4q6nn6ab8mdu"]
 
 [ext_resource type="Script" path="res://objects/PlayerController.gd" id="1_w8oh6"]
+[ext_resource type="Script" path="res://objects/UIHandler.gd" id="2_sppe0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w211f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aldf6"]
+bg_color = Color(0.2369, 0.716191, 1.92523e-07, 1)
 
 [node name="Player" type="Node3D"]
 
@@ -20,3 +24,25 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_sppe0")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "TEST"
+
+[node name="StaminaBar" type="CanvasGroup" parent="UI"]
+
+[node name="Background" type="Panel" parent="UI/StaminaBar"]
+offset_left = 8.0
+offset_top = 607.0
+offset_right = 456.0
+offset_bottom = 632.0
+
+[node name="Fill" type="Panel" parent="UI/StaminaBar"]
+offset_left = 8.0
+offset_top = 607.0
+offset_right = 456.0
+offset_bottom = 632.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_aldf6")
