@@ -13,6 +13,7 @@ const CAMERA_ROT_SPEED = 0.01
 # signal setup
 signal player_running
 signal stamina_changed
+signal change_scene
 
 # objects
 @onready var camera = $Camera3D

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfr8eq5d84lxw"]
+[gd_scene load_steps=7 format=3 uid="uid://dfr8eq5d84lxw"]
 
 [ext_resource type="PackedScene" uid="uid://4q6nn6ab8mdu" path="res://objects/Player.tscn" id="1_03l7v"]
+[ext_resource type="Script" path="res://scenes/GameInitialize.gd" id="1_nfwr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkb6c"]
 sky_curve = 0.665741
@@ -16,6 +17,7 @@ sky = SubResource("Sky_3ettn")
 [sub_resource type="BoxMesh" id="BoxMesh_o6fap"]
 
 [node name="GameInitialize" type="Node3D"]
+script = ExtResource("1_nfwr8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0a4c2")
