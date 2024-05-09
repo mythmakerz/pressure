@@ -57,7 +57,6 @@ func _physics_process(delta):
 	if not Input.is_action_pressed("sprint") and STAMINA < MAX_STAMINA:
 		STAMINA = min(MAX_STAMINA, STAMINA + delta * STAMINA_DROP_RATE)
 	
-	var stamina_percentage = STAMINA / MAX_STAMINA
 	stamina_bar.value = STAMINA
 	
 	move_and_slide()
