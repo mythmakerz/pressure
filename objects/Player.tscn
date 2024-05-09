@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://4q6nn6ab8mdu"]
+[gd_scene load_steps=6 format=3 uid="uid://4q6nn6ab8mdu"]
 
 [ext_resource type="Script" path="res://objects/PlayerController.gd" id="1_w8oh6"]
-[ext_resource type="Script" path="res://objects/UIHandler.gd" id="2_sppe0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w211f"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aldf6"]
-bg_color = Color(0.2369, 0.716191, 1.92523e-07, 1)
+[sub_resource type="GDScript" id="GDScript_n7npm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78xsd"]
+bg_color = Color(0.473585, 0, 0.0369971, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkdio"]
+bg_color = Color(0.145098, 0.705882, 0, 1)
 
 [node name="Player" type="Node3D"]
 
@@ -19,30 +23,27 @@ shape = SubResource("CapsuleShape3D_w211f")
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.494017, 0)
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="CharacterBody3D"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("2_sppe0")
+script = SubResource("GDScript_n7npm")
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Label" type="Label" parent="CharacterBody3D/UI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "TEST"
 
-[node name="StaminaBar" type="CanvasGroup" parent="UI"]
-
-[node name="Background" type="Panel" parent="UI/StaminaBar"]
+[node name="StaminaBar" type="ProgressBar" parent="CharacterBody3D/UI"]
+layout_mode = 0
 offset_left = 8.0
-offset_top = 607.0
-offset_right = 456.0
-offset_bottom = 632.0
+offset_top = 613.0
+offset_right = 302.0
+offset_bottom = 640.0
+theme_override_styles/background = SubResource("StyleBoxFlat_78xsd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jkdio")
+show_percentage = false
 
-[node name="Fill" type="Panel" parent="UI/StaminaBar"]
-offset_left = 8.0
-offset_top = 607.0
-offset_right = 456.0
-offset_bottom = 632.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_aldf6")
+[connection signal="stamina_changed" from="CharacterBody3D" to="CharacterBody3D/UI" method="_on_character_body_3d_stamina_changed"]

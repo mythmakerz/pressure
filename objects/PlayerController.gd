@@ -2,9 +2,9 @@ extends CharacterBody3D
 
 # player variables
 const SPEED = 5.0
-var STAMINA = 100
+@export var STAMINA = 100
 const MAX_STAMINA = 100
-const STAMINA_DROP_RATE = 15
+const STAMINA_DROP_RATE = 10
 const SPRINT_SPEED_MULTIPLIER = 1.5
 
 # camera variables
@@ -12,17 +12,20 @@ const CAMERA_ROT_SPEED = 0.01
 
 # signal setup
 signal player_running
+signal stamina_changed
 
 # objects
 @onready var camera = $Camera3D
-@onready var ui = $Control
+@onready var stamina_bar = $UI/StaminaBar
 
 # functions
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# initialize stamina bar
+	stamina_bar.value = STAMINA
+	
 
 func _physics_process(delta):
-
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var camera_rotation = camera.global_transform.basis.get_euler().y
 
@@ -52,17 +55,17 @@ func _physics_process(delta):
 	# stamina regeneration when player isnt sprinting
 	if not Input.is_action_pressed("sprint") and STAMINA < MAX_STAMINA:
 		STAMINA = min(MAX_STAMINA, STAMINA + delta * STAMINA_DROP_RATE)
-
-	# debug, remove when we actually update the damn ui
-	print(STAMINA)
-
+	
+	var stamina_percentage = STAMINA / MAX_STAMINA
+	stamina_bar.value = STAMINA
+	
 	move_and_slide()
 
 # input handlers
 func _input(event):
-	# ESCAPE UNLOCKS MOUSE
+	# ESCAPE CLOSES GAME LOL!!!
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_tree().quit()
 
 	# CAMERA BEHAVIOR
 	if event is InputEventMouseMotion:
