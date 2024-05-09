@@ -59,7 +59,9 @@ func _physics_process(delta):
 	
 	stamina_bar.value = STAMINA
 	
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.slide(collision.get_normal())
 
 # input handlers
 func _input(event):
@@ -70,5 +72,5 @@ func _input(event):
 	# CAMERA BEHAVIOR
 	if event is InputEventMouseMotion:
 		# rotate the camera
-		camera.rotate_y( - event.relative.x * CAMERA_ROT_SPEED)
+		camera.rotate_y(-event.relative.x * CAMERA_ROT_SPEED)
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -20, 20)
