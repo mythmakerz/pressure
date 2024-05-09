@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://4q6nn6ab8mdu"]
+[gd_scene load_steps=7 format=3 uid="uid://4q6nn6ab8mdu"]
 
 [ext_resource type="Script" path="res://objects/PlayerController.gd" id="1_w8oh6"]
+[ext_resource type="Texture2D" uid="uid://v30q2cxd5xb5" path="res://assets/textures/ui/cursor.png" id="2_j5jg7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w211f"]
 
@@ -25,9 +26,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.494017, 0)
 
 [node name="UI" type="Control" parent="CharacterBody3D"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = SubResource("GDScript_n7npm")
 
 [node name="Label" type="Label" parent="CharacterBody3D/UI"]
@@ -45,5 +48,21 @@ offset_bottom = 640.0
 theme_override_styles/background = SubResource("StyleBoxFlat_78xsd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jkdio")
 show_percentage = false
+
+[node name="FakeCursor" type="TextureRect" parent="CharacterBody3D/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_j5jg7")
 
 [connection signal="stamina_changed" from="CharacterBody3D" to="CharacterBody3D/UI" method="_on_character_body_3d_stamina_changed"]
