@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cib8lwtyfj4tf"]
+[gd_scene load_steps=3 format=3 uid="uid://cib8lwtyfj4tf"]
 
 [ext_resource type="Script" path="res://scenes/menus/MenuScene.gd" id="1_50ope"]
+[ext_resource type="Script" path="res://addons/midi/MidiPlayer.gd" id="2_y5fpg"]
 
 [node name="MenuScene" type="Control"]
 layout_mode = 3
@@ -48,6 +49,11 @@ text = "play"
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "settings"
+
+[node name="MidiPlayer" type="Node" parent="."]
+script = ExtResource("2_y5fpg")
+file = "res://assets/mididb/Intro.mid"
+soundfont = "res://assets/soundfontdb/gm.sf2"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
