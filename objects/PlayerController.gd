@@ -34,7 +34,7 @@ func _physics_process(delta):
 
 	# check if player is trying to sprint
 	var speed_multiplier = 1.0
-	if Input.is_action_pressed("sprint") and STAMINA > 0:
+	if Input.is_action_pressed("sprint") and STAMINA > 0 and input_dir:
 		speed_multiplier = SPRINT_SPEED_MULTIPLIER
 		STAMINA = max(0, STAMINA - STAMINA_DROP_RATE * delta)
 		emit_signal("player_running", true)
@@ -54,7 +54,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	# stamina regeneration when player isnt sprinting
-	if not Input.is_action_pressed("sprint") and STAMINA < MAX_STAMINA:
+	if not Input.is_action_pressed("sprint") and STAMINA < MAX_STAMINA and not input_dir:
 		STAMINA = min(MAX_STAMINA, STAMINA + delta * STAMINA_DROP_RATE)
 	
 	stamina_bar.value = STAMINA
