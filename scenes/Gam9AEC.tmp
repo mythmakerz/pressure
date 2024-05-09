@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfr8eq5d84lxw"]
+
+[ext_resource type="PackedScene" uid="uid://4q6nn6ab8mdu" path="res://objects/Player.tscn" id="1_03l7v"]
+[ext_resource type="Script" path="res://scenes/GameInitialize.gd" id="1_nfwr8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkb6c"]
+sky_curve = 0.665741
+
+[sub_resource type="Sky" id="Sky_3ettn"]
+sky_material = SubResource("ProceduralSkyMaterial_jkb6c")
+
+[sub_resource type="Environment" id="Environment_0a4c2"]
+background_mode = 2
+background_color = Color(0, 1, 1, 1)
+sky = SubResource("Sky_3ettn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6fap"]
+
+[node name="GameInitialize" type="Node3D"]
+script = ExtResource("1_nfwr8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0a4c2")
+
+[node name="Player" parent="." instance=ExtResource("1_03l7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322613, 0, 2.07921)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999999, 0, -0.00120428, 0, 1, 0, 0.00120428, 0, 0.999999, 2.12573, 0.790726, -2.05143)
+mesh = SubResource("BoxMesh_o6fap")
