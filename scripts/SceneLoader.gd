@@ -10,7 +10,10 @@ func _ready():
 func _process(delta):
 	pass
 
-# load scenes
-func loadScene(scene : SceneTree, transition : bool):
+func loadScene(scene, transition : bool):
 	transition = transition or true
 	# load scene
+	if transition:
+		get_tree().change_scene_to_file(scene)
+	else:
+		get_tree().change_scene_to_file(scene)
