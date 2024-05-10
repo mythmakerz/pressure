@@ -1,31 +1,41 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpin16yyxb1t6"]
+[gd_scene load_steps=13 format=3 uid="uid://bpin16yyxb1t6"]
 
-[ext_resource type="Texture2D" uid="uid://dvwbwegcxsv48" path="res://assets/textures/obj/Wall.png" id="1_gf8w0"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2rh3"]
-frequency = 0.1585
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rd1bx"]
-noise = SubResource("FastNoiseLite_g2rh3")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crvoh"]
-albedo_color = Color(1, 1, 0.454902, 1)
-albedo_texture = SubResource("NoiseTexture2D_rd1bx")
+[ext_resource type="Material" uid="uid://dsocfwl3ekxd5" path="res://assets/materials/floor.tres" id="1_rlvgv"]
+[ext_resource type="Texture2D" uid="uid://dvwbwegcxsv48" path="res://assets/textures/obj/Wall.png" id="2_7e8aw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4ryob"]
-material = SubResource("StandardMaterial3D_crvoh")
+material = ExtResource("1_rlvgv")
+size = Vector2(4, 4)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h2cla"]
-data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n5ftu"]
+data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tdml"]
-albedo_texture = ExtResource("1_gf8w0")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3afo"]
+albedo_texture = ExtResource("2_7e8aw")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_xtqye"]
-material = SubResource("StandardMaterial3D_6tdml")
+[sub_resource type="PlaneMesh" id="PlaneMesh_3yjbs"]
+material = SubResource("StandardMaterial3D_q3afo")
+size = Vector2(4, 4)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w67d2"]
-data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rkocr"]
+data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0tvd8"]
+frequency = 0.1194
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tx2dd"]
+noise = SubResource("FastNoiseLite_0tvd8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nga23"]
+albedo_texture = SubResource("NoiseTexture2D_tx2dd")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_deigh"]
+material = SubResource("StandardMaterial3D_nga23")
+flip_faces = true
+size = Vector2(4, 4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6pw2c"]
+data = PackedVector3Array(-2, 0, 2, 2, 0, 2, 2, 0, -2, -2, 0, -2, -2, 0, 2, 2, 0, -2)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -35,13 +45,22 @@ mesh = SubResource("PlaneMesh_4ryob")
 [node name="StaticBody3D" type="StaticBody3D" parent="FloorTile_Carpet"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorTile_Carpet/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_h2cla")
+shape = SubResource("ConcavePolygonShape3D_n5ftu")
 
 [node name="WallTile" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49122, 0)
-mesh = SubResource("PlaneMesh_xtqye")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("PlaneMesh_3yjbs")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallTile"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallTile/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_w67d2")
+shape = SubResource("ConcavePolygonShape3D_rkocr")
+
+[node name="CeilingTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("PlaneMesh_deigh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CeilingTile"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CeilingTile/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6pw2c")
