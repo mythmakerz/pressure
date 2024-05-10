@@ -53,6 +53,7 @@ text = "settings"
 [node name="MidiPlayer" type="Node" parent="."]
 script = ExtResource("2_y5fpg")
 file = "res://assets/mididb/Intro.mid"
+volume_db = -31.139
 soundfont = "res://assets/soundfontdb/gm.sf2"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
